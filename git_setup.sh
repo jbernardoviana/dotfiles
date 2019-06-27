@@ -1,5 +1,6 @@
 echo "Type in your first and last name (no accent or special characters - e.g. 'ç'): "
 read full_name
+
 echo "Type in your email address (the one used for your GitHub account): "
 read email
 
@@ -11,3 +12,5 @@ git commit --message "My identity for @lewagon in the gitconfig"
 git push origin master
 
 git remote add upstream git@github.com:lewagon/dotfiles.git
+
+echo "👌 Awesome, all set."

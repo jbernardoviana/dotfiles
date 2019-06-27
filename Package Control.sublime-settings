@@ -3,15 +3,14 @@
   [
     "AdvancedNewFile",
     "All Autocomplete",
-    "ApplySyntax",
-    "BracketHighlighter",
-    "DocBlockr",
+    "Babel",
     "Emmet",
+    "ERB Snippets",
     "Git",
     "GitGutter",
-    "JSX",
     "Package Control",
-    "Ruby on Rails snippets",
-    "SCSS"
+    "SCSS",
+    "SublimeLinter",
+    "SublimeLinter-rubocop"
   ]
 }
