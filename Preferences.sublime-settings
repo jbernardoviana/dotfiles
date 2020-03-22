@@ -1,5 +1,5 @@
 {
-	"color_scheme": "Packages/Materialize/schemes/Material Vim Blackboard.tmTheme",
+	"color_scheme": "Packages/Materialize/schemes/Material Cobalt.tmTheme",
 	"detect_indentation": false,
 	"draw_white_space": true,
 	"ensure_newline_at_eof_on_save": true,
@@ -19,6 +19,7 @@
 		"public/packs",
 		"coverage"
 	],
+	"font_size": 16,
 	"highlight_modified_tabs": true,
 	"hot_exit": false,
 	"ignored_packages":
@@ -31,7 +32,7 @@
 		80
 	],
 	"tab_size": 2,
-	"theme": "Material Vim Blackboard.sublime-theme",
+	"theme": "Material Cobalt.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_automatic_white_space": true,
 	"trim_trailing_white_space_on_save": true,
