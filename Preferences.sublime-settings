@@ -1,5 +1,5 @@
 {
-	"color_scheme": "Packages/Materialize/schemes/Material Cobalt.tmTheme",
+	"color_scheme": "Packages/gruvbox/gruvbox (Dark) (Soft).sublime-color-scheme",
 	"detect_indentation": false,
 	"draw_white_space": true,
 	"ensure_newline_at_eof_on_save": true,
@@ -32,7 +32,7 @@
 		80
 	],
 	"tab_size": 2,
-	"theme": "Material Cobalt.sublime-theme",
+	"theme": "gruvbox.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_automatic_white_space": true,
 	"trim_trailing_white_space_on_save": true,
