@@ -48,7 +48,7 @@
   mergeoptions = --no-edit
 [user]
 	email = j.bernardo.viana@hotmail.com
-	name = João Viana
+	name = Joao Viana
 [init]
 	defaultBranch = main
 
