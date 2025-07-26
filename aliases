@@ -4,6 +4,210 @@ alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/m
 
 # Quickly serve the current directory as HTTP
 alias serve='ruby -run -e httpd . -p 8000' # Or python -m SimpleHTTPServer :)
+alias serve-python='python -m http.server 8000'
 
 # weather
 alias wttr='curl wttr.in/lisbon'
+
+# Navigation and file management
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ~='cd ~'
+alias -- -='cd -'
+
+# List directory contents
+alias ll='ls -la'
+alias la='ls -A'
+alias l='ls -CF'
+alias lsd='ls -la | grep "^d"'
+
+# File operations
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias mkdir='mkdir -p'
+
+# Search and find
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias h='history'
+alias j='jobs -l'
+
+# System information
+alias df='df -h'
+alias du='du -h'
+alias free='free -h'
+alias meminfo='cat /proc/meminfo'
+alias cpuinfo='cat /proc/cpuinfo'
+
+# Network
+alias ping='ping -c 5'
+alias ports='netstat -tulanp'
+alias header='curl -I'
+
+# Git shortcuts - moved to ~/.gitconfig
+
+# Docker shortcuts
+alias d='docker'
+alias dc='docker-compose'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+alias di='docker images'
+alias dex='docker exec -it'
+alias dlogs='docker logs'
+
+# Development shortcuts
+alias py='python'
+alias py3='python3'
+alias pip='pip3'
+alias rb='ruby'
+alias js='node'
+alias npm='npm --no-fund'
+
+# Quick directory access
+alias dev='cd ~/code'
+alias docs='cd ~/Documents'
+alias dl='cd ~/Downloads'
+alias dt='cd ~/Desktop'
+
+# Quick file editing
+alias zshrc='code ~/.zshrc'
+alias aliases='code ~/.aliases'
+alias gitconfig='code ~/.gitconfig'
+
+# System maintenance
+alias update='brew update && brew upgrade'
+alias cleanup='brew cleanup'
+alias doctor='brew doctor'
+
+# Fun and useful
+alias weather='curl wttr.in'  # Same as 'wttr'
+alias moon='curl wttr.in/moon'
+alias starwars='telnet towel.blinkenlights.nl'
+alias matrix='echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|gawk '"'"'{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;36m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'"'"''
+
+# Development workflow aliases
+alias rs='rails_server'
+alias rc='rails_console'
+alias ps='python_server'
+alias jn='jupyter_notebook'
+alias cpe='create_python_env'
+alias ape='activate_python_env'
+alias gclean='git_cleanup'
+alias dclean='docker_cleanup'
+alias versions='show_versions'
+
+# Quick project navigation
+alias projects='cd ~/code'  # Same as 'dev'
+alias rails_projects='cd ~/code && find . -name "Gemfile" -exec grep -l "rails" {} \;'
+alias python_projects='cd ~/code && find . -name "requirements.txt" -o -name "pyproject.toml" -o -name "setup.py"'
+
+# Enhanced git aliases - moved to ~/.gitconfig
+
+# Docker enhanced aliases (additional to basic ones above)
+alias dstop='docker stop $(docker ps -q)'
+alias drm='docker rm $(docker ps -aq)'
+
+# macOS specific
+if [[ `uname` =~ "Darwin" ]]; then
+  # File management
+  alias showfiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
+  alias hidefiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'
+  alias o='open'
+  alias oo='open .'
+  
+  # System utilities
+  alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+  alias spotlight='mdfind -name'
+  alias finder='open .'
+  alias desktop='cd ~/Desktop'  # Same as 'dt'
+  alias downloads='cd ~/Downloads'  # Same as 'dl'
+  alias apps='cd /Applications'
+  
+  # Network and connectivity
+  alias wifi='networksetup -setairportpower en0'
+  alias wifion='networksetup -setairportpower en0 on'
+  alias wifioff='networksetup -setairportpower en0 off'
+  alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport'
+  alias wifi-scan='airport -s'
+  
+  # System information
+  alias battery='pmset -g batt'
+  alias cpu='top -l 1 | head -n 10'
+  alias memory='vm_stat'
+  alias disk='df -h'
+  alias uptime='uptime'
+  
+  # Screenshots and media
+  alias screenshot='screencapture -i'
+  alias screenshot-window='screencapture -iW'
+  alias screenshot-desktop='screencapture -x ~/Desktop/screenshot-$(date +%Y%m%d-%H%M%S).png'
+  
+  # Quick access to system preferences
+  alias sysprefs='open /System/Library/PreferencePanes'
+  alias energy='pmset -g'
+  alias sleep='pmset sleepnow'
+  alias wake='caffeinate -u'
+  
+  # Development tools
+  alias xcode='open -a Xcode'
+  alias simulator='open -a Simulator'
+  alias safari='open -a Safari'
+  alias chrome='open -a "Google Chrome"'
+  alias firefox='open -a Firefox'
+  
+  # Quick system actions
+  alias lock='pmset displaysleepnow'
+  alias restart='sudo reboot'
+  alias shutdown='sudo shutdown -h now'
+  alias eject='diskutil eject'
+  
+  # Clipboard utilities
+  alias pbcopy='pbcopy'
+  alias pbpaste='pbpaste'
+  alias clip='pbcopy'
+  alias paste='pbpaste'
+  
+  # Quick file operations
+  alias trash='rm -rf ~/.Trash/*'
+  alias empty-trash='rm -rf ~/.Trash/*'
+  alias show-trash='open ~/.Trash'
+  
+  # Audio/Video
+  alias mute='osascript -e "set volume output muted true"'
+  alias unmute='osascript -e "set volume output muted false"'
+  alias volume='osascript -e "set volume output volume"'
+  alias volume-up='osascript -e "set volume output volume (output volume of (get volume settings) + 10)"'
+  alias volume-down='osascript -e "set volume output volume (output volume of (get volume settings) - 10)"'
+  
+  # Quick app launching
+  alias notes='open -a Notes'
+  alias mail='open -a Mail'
+  alias messages='open -a Messages'
+  alias facetime='open -a FaceTime'
+  alias calendar='open -a Calendar'
+  alias reminders='open -a Reminders'
+  alias photos='open -a Photos'
+  alias music='open -a Music'
+  alias tv='open -a TV'
+  alias books='open -a Books'
+  alias podcasts='open -a Podcasts'
+  alias maps='open -a Maps'
+  alias weather='open -a Weather'
+  alias stocks='open -a Stocks'
+  alias calculator='open -a Calculator'
+  alias clock='open -a Clock'
+  alias voice-memos='open -a "Voice Memos"'
+  alias home='open -a Home'
+  alias shortcuts='open -a Shortcuts'
+  alias translate='open -a Translate'
+  alias measure='open -a Measure'
+  alias compass='open -a Compass'
+  alias find-my='open -a "Find My"'
+  alias health='open -a Health'
+  alias wallet='open -a Wallet'
+  alias settings='open -a "System Settings"'
+fi

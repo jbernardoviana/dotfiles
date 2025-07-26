@@ -11,29 +11,50 @@
 
 [core]
   pager = less -FRSX
-	editor = '/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl' -n -w
+	editor = code --wait
 
 [alias]
+  # Basic commands
   co = checkout
   st = status -sb
   br = branch
   ci = commit
   fo = fetch origin
-  d = !git --no-pager diff
-  dt  = difftool
+  dt = difftool
   stat = !git --no-pager diff --stat
 
-  # Clean merged branches
-  sweep = !git branch --merged master | grep -v 'master$' | xargs git branch -d && git remote prune origin
-
+  # Short aliases (avoiding conflicts with shell aliases)
+  # Note: 'd', 'l', 's' conflicts resolved - using longer names
+  gs = status
+  gst = status -sb
+  ga = add
+  gc = commit
+  gp = push
+  gpull = pull --rebase
+  glog = log --oneline --graph --decorate
+  gl = log --oneline
   # http://www.jukie.net/bart/blog/pimping-out-git-log
   lg = log --graph --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset'
+  gd = diff
+  gco = checkout
+  gcb = checkout -b
+  gb = branch
+  gf = fetch
+  gm = merge
+  gdiff = diff --word-diff
+  gpush = push
+  gcommit = commit -m
+
+  # Clean merged branches
+  sweep = !git branch --merged main | grep -v 'main$' | xargs git branch -d && git remote prune origin
+  mop = !git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
+
 
   # Serve local repo. http://coderwall.com/p/eybtga
   # Then other can access via `git clone git://#{YOUR_IP_ADDRESS}/
-  serve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git
+  # ?? gserve = !git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git  # Conflicts with shell 'serve' alias
 
-  m = checkout master
+  m = checkout main
 
   # Removes a file from the index
   unstage = reset HEAD --
@@ -43,12 +64,19 @@
 
 [push]
 	default = simple
+  autoSetupRemote = true
 
-[branch "master"]
+[branch "main"]
   mergeoptions = --no-edit
 [user]
 	email = j.bernardo.viana@hotmail.com
-	name = Joao Viana
+	name = João Viana
 [init]
 	defaultBranch = main
-
+[credential]
+	helper = store
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f

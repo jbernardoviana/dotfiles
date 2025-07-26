@@ -1,4 +1,11 @@
+Host de-vm
+  HostName 34.175.207.128
+  IdentityFile ~/.ssh/id_ed25519
+  User jb
+
 Host *
   UseKeychain yes
   AddKeysToAgent yes
   IdentityFile ~/.ssh/id_ed25519
+  # Fallback to id_rsa if ed25519 doesn't exist
+  IdentityFile ~/.ssh/id_rsa

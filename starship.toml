@@ -1,0 +1,146 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Simple, clean format
+format = """
+$username
+$hostname
+$directory\
+$git_branch\
+$git_status\
+$git_state\
+$git_commit
+$battery\
+$character
+"""
+
+# Right side format for language versions
+right_format = """
+$ruby   
+$python
+$nodejs
+$aws
+$gcloud
+"""
+
+
+# Replace the '❯' symbol in the prompt with '➜'
+[character]
+success_symbol = '[❯](bold green)'
+error_symbol = '[✗](bold red)'
+
+# Disable modules we don't need
+[package]
+disabled = false
+
+[memory_usage]
+disabled = false
+
+[time]
+disabled = true
+
+[cmd_duration]
+disabled = false
+min_time = 100
+
+
+# Fill module - creates space between left and right sides
+[fill]
+disabled = false
+symbol = '-'
+style = 'bold gray'
+
+# Cloud modules
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+# Battery module: Display a battery icon when the battery is charging or discharging
+[battery]
+full_symbol = '🔋 '
+charging_symbol = '⚡️ '
+discharging_symbol = '💀 '
+disabled = false
+
+[[battery.display]]
+threshold = 25
+style = 'bold red'
+#########################
+
+# Git modules
+[git_metrics]
+disabled = false
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = '[🍒 PICKING](bold red)'
+
+# Customize the git status module - keep it simple
+[git_status]
+conflicted = "⚡"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕"
+untracked = "?"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+stashed = "≡"
+
+# Customize the git_branch module
+[git_branch]
+symbol = ' '
+truncation_length = 60
+truncation_symbol = ""
+style = "bold purple"
+
+# Ruby module - show version when relevant
+[ruby]
+symbol = "💎 "
+style = "bold red"
+disabled = false
+#format = "[$symbol$version]($style) "
+format = 'via [$symbol($version )]($style)'
+
+# Python module - show version when relevant
+[python]
+symbol = "🐍 "
+pyenv_version_name = true
+pyenv_prefix = ""
+style = "bold yellow"
+disabled = false
+format = "via [$symbol$pyenv_prefix$version]($style) "
+#format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+# Node.js module - show version when relevant
+[nodejs]
+symbol = "📦 "
+style = "bold green"
+disabled = true
+format = "via [$symbol$version]($style) "
+
+# Directory module - keep it simple
+[directory]
+truncation_length = 10
+truncation_symbol = ""
+style = "bold blue"
+
+# Username module - only show if not default
+[username]
+style_user = "bold blue"
+style_root = "bold red"
+format = "[$user]($style) "
+disabled = true
+show_always = false
+
+# Hostname module - only show if not default
+[hostname]
+ssh_only = true
+disabled = true
+style = "bold green"

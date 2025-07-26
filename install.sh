@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+
 # Define a function which rename a `target` file to `target.backup` if the file
 # exists and if it's a 'real' file, ie not a symlink
 backup() {
@@ -31,13 +32,22 @@ for name in aliases gitconfig irbrc rspec zprofile zshrc; do
   fi
 done
 
-# Install zsh-syntax-highlighting plugin
+# Install zsh plugins
 CURRENT_DIR=`pwd`
 ZSH_PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
-mkdir -p "$ZSH_PLUGINS_DIR" && cd "$ZSH_PLUGINS_DIR"
-if [ ! -d "$ZSH_PLUGINS_DIR/zsh-syntax-highlighting" ]; then
-  echo "-----> Installing zsh plugin 'zsh-syntax-highlighting'..."
+if [ ! -d "$ZSH_PLUGINS_DIR" ]; then
+  echo "-----> Creating plugins directory..."
+  mkdir -p "$ZSH_PLUGINS_DIR"
+fi
+
+cd "$ZSH_PLUGINS_DIR"
+if [ ! -d "zsh-autosuggestions" ]; then
+  echo "-----> Installing zsh plugin 'zsh-autosuggestions'..."
   git clone https://github.com/zsh-users/zsh-autosuggestions
+fi
+
+if [ ! -d "zsh-syntax-highlighting" ]; then
+  echo "-----> Installing zsh plugin 'zsh-syntax-highlighting'..."
   git clone https://github.com/zsh-users/zsh-syntax-highlighting
 fi
 cd "$CURRENT_DIR"
@@ -46,13 +56,24 @@ cd "$CURRENT_DIR"
 # If it's a macOS
 if [[ `uname` =~ "Darwin" ]]; then
   CODE_PATH=~/Library/Application\ Support/Code/User
+  CURSOR_PATH=~/Library/Application\ Support/Cursor/User
 # Else, it's a Linux
 else
   CODE_PATH=~/.config/Code/User
+  CURSOR_PATH=~/.config/Cursor/User
   # If this folder doesn't exist, it's a WSL
   if [ ! -e $CODE_PATH ]; then
     CODE_PATH=~/.vscode-server/data/Machine
   fi
+  if [ ! -e $CURSOR_PATH ]; then
+    CURSOR_PATH=~/.vscode-server/data/Machine
+  fi
+fi
+
+# Ensure VS Code directory exists
+if [ ! -d "$CODE_PATH" ]; then
+  echo "-----> Creating VS Code directory..."
+  mkdir -p "$CODE_PATH"
 fi
 
 for name in settings.json keybindings.json; do
@@ -61,13 +82,46 @@ for name in settings.json keybindings.json; do
   symlink $PWD/$name $target
 done
 
+# Symlink Cursor settings and keybindings
+if [ -d "$CURSOR_PATH" ] || [[ `uname` =~ "Darwin" ]]; then
+  echo "-----> Setting up Cursor configuration..."
+  
+  # Ensure Cursor directory exists
+  if [ ! -d "$CURSOR_PATH" ]; then
+    echo "-----> Creating Cursor directory..."
+    mkdir -p "$CURSOR_PATH"
+  fi
+
+  # Symlink keybindings (shared with VS Code)
+  target="$CURSOR_PATH/keybindings.json"
+  backup $target
+  symlink $PWD/keybindings.json $target
+
+  # Symlink Cursor-specific settings
+  target="$CURSOR_PATH/settings.json"
+  backup $target
+  symlink $PWD/cursor-settings.json $target
+fi
+
 # Symlink SSH config file to the present `config` file for macOS and add SSH passphrase to the keychain
 if [[ `uname` =~ "Darwin" ]]; then
   target=~/.ssh/config
   backup $target
   symlink $PWD/config $target
-  ssh-add -K ~/.ssh/id_ed25519
+  # Use modern flags to suppress deprecation warnings
+  ssh-add --apple-use-keychain ~/.ssh/id_ed25519 2>/dev/null || ssh-add -K ~/.ssh/id_ed25519
 fi
+
+# Setup Starship configuration
+echo "-----> Setting up Starship configuration..."
+STARSHIP_CONFIG_DIR="$HOME/.config"
+if [ ! -d "$STARSHIP_CONFIG_DIR" ]; then
+  echo "-----> Creating Starship config directory..."
+  mkdir -p "$STARSHIP_CONFIG_DIR"
+fi
+target="$STARSHIP_CONFIG_DIR/starship.toml"
+backup $target
+symlink $PWD/starship.toml $target
 
 # Refresh the current terminal with the newly installed configuration
 exec zsh

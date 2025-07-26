@@ -59,6 +59,9 @@
   "ruby.rubocop.configFilePath": ".rubocop.yml",
   "ruby.rubocop.useBundler": true,
   "editor.inlineSuggest.suppressSuggestions": true,
-  "workbench.colorTheme": "Noctis Bordo",
-  "github.copilot.nextEditSuggestions.enabled": true
+  "cursor.cpp.disabledLanguages": ["plaintext", "scminput"],
+  "git.replaceTagsWhenPull": true,
+  "cursor.cpp.enablePartialAccepts": true,
+  "workbench.colorTheme": "Noctis Uva",
+  "workbench.colorCustomizations": {}
 }
