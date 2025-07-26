@@ -6,8 +6,6 @@ alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/m
 alias serve='ruby -run -e httpd . -p 8000' # Or python -m SimpleHTTPServer :)
 alias serve-python='python -m http.server 8000'
 
-# weather
-alias wttr='curl wttr.in/lisbon'
 
 # Navigation and file management
 alias ..='cd ..'
@@ -84,7 +82,7 @@ alias cleanup='brew cleanup'
 alias doctor='brew doctor'
 
 # Fun and useful
-alias weather='curl wttr.in'  # Same as 'wttr'
+# Weather function is defined in zshrc
 alias moon='curl wttr.in/moon'
 alias starwars='telnet towel.blinkenlights.nl'
 alias matrix='echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|gawk '"'"'{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;36m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'"'"''
@@ -196,7 +194,7 @@ if [[ `uname` =~ "Darwin" ]]; then
   alias books='open -a Books'
   alias podcasts='open -a Podcasts'
   alias maps='open -a Maps'
-  alias weather='open -a Weather'
+  alias weather='open -a Weather'  # macOS Weather app
   alias stocks='open -a Stocks'
   alias calculator='open -a Calculator'
   alias clock='open -a Clock'

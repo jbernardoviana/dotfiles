@@ -29,6 +29,9 @@ Check this https://github.com/lewagon/setup/blob/master/macos.md
 
 ## 🚀 Installation
 
+<details>
+<summary><strong>Quick Setup (Click to expand)</strong></summary>
+
 1. Clone this repository:
    ```bash
    git clone https://github.com/jbernardoviana/dotfiles.git
@@ -50,6 +53,140 @@ The script will:
 - Initialize Starship prompt (clean, minimal configuration)
 
 **Note:** For iTerm2 profiles, export your current profiles as JSON files to the `iterm2/` directory. See `iterm2/README.md` for instructions.
+
+</details>
+
+<details>
+<summary><strong>Complete New MacBook Setup Guide (Click to expand)</strong></summary>
+
+### 1. **Initial Setup**
+```bash
+# Clone your dotfiles
+git clone https://github.com/jbernardoviana/dotfiles.git
+cd dotfiles
+
+# Run the main installation script
+./install.sh
+```
+
+### 2. **Install Required Tools**
+
+#### **Homebrew** (Package Manager)
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+#### **Essential Tools**
+```bash
+# Install the tools your dotfiles expect
+brew install git
+brew install zsh
+brew install starship
+brew install rbenv
+brew install pyenv
+brew install nvm
+```
+
+#### **Applications**
+```bash
+# Install applications
+brew install --cask iterm2
+brew install --cask visual-studio-code
+brew install --cask cursor
+```
+
+### 3. **Configure Each Application**
+
+#### **iTerm2**
+```bash
+# Import your iTerm2 profiles
+# 1. Open iTerm2
+# 2. Go to File > Import Profile...
+# 3. Select the file from: dotfiles/iterm2/iTerm2 State.itermexport
+```
+
+#### **VS Code & Cursor**
+- The `install.sh` script already symlinked your settings
+- VS Code settings: `~/Library/Application Support/Code/User/settings.json`
+- Cursor settings: `~/Library/Application Support/Cursor/User/settings.json`
+- Keybindings are shared between both editors
+
+#### **Shell (Zsh)**
+- Oh-My-Zsh will be installed automatically
+- Your `.zshrc` and `.aliases` are already symlinked
+- Starship prompt is configured
+
+### 4. **SSH Setup**
+```bash
+# Generate SSH key (if you don't have one)
+ssh-keygen -t ed25519 -C "your-email@example.com"
+
+# Add to SSH agent
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+
+# Your SSH config is already symlinked from dotfiles/config
+```
+
+### 5. **Development Environment**
+
+#### **Ruby (via rbenv)**
+```bash
+# Install Ruby
+rbenv install 3.2.2  # or whatever version you need
+rbenv global 3.2.2
+gem install bundler
+```
+
+#### **Python (via pyenv)**
+```bash
+# Install Python
+pyenv install 3.11.0  # or whatever version you need
+pyenv global 3.11.0
+pip install ipdb  # for debugging
+```
+
+#### **Node.js (via nvm)**
+```bash
+# Install Node.js
+nvm install 18  # or whatever version you need
+nvm use 18
+nvm alias default 18
+```
+
+### 6. **Verify Everything Works**
+```bash
+# Test your setup
+versions  # Shows all installed versions
+wttr      # Test weather function
+weather   # Opens macOS Weather app
+```
+
+## 🎯 Quick Checklist
+
+- [ ] Clone dotfiles and run `./install.sh`
+- [ ] Install Homebrew and essential tools
+- [ ] Install iTerm2, VS Code, Cursor
+- [ ] Import iTerm2 profiles
+- [ ] Set up SSH keys
+- [ ] Install Ruby, Python, Node.js
+- [ ] Test all functions and aliases
+
+## 🔧 What Gets Automatically Configured
+
+✅ **Shell**: Zsh with Oh-My-Zsh, Starship prompt, aliases  
+✅ **Git**: Configuration and aliases  
+✅ **VS Code**: Settings and keybindings  
+✅ **Cursor**: Settings and keybindings  
+✅ **SSH**: Config file  
+✅ **iTerm2**: Profile import ready  
+
+## 🎯 One-Liner Setup (After Homebrew)
+
+```bash
+git clone https://github.com/jbernardoviana/dotfiles.git && cd dotfiles && ./install.sh && brew install --cask iterm2 visual-studio-code cursor
+```
+
+</details>
 
 ## 🔧 Customization
 

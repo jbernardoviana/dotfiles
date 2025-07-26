@@ -87,7 +87,7 @@ function extract() {
   fi
 }
 
-function weather() {
+function wttr() {
   curl "wttr.in/${1:-lisbon}"
 }
 
